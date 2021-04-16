@@ -14,6 +14,7 @@ import javax.swing.table.*;
  */
 public class Admin extends javax.swing.JFrame {
     private Result res=new Result();
+    private clo c=new clo();
     DefaultTableModel model=new DefaultTableModel();
     DefaultTableModel model1=new DefaultTableModel();
     
@@ -34,6 +35,12 @@ public class Admin extends javax.swing.JFrame {
         model1.addColumn("Rubric");
         model1.addColumn("Rubric Level");
         cloTable.setModel(model1);
+        c.setName("clo1");
+        res.cloList.add(c);
+        c.setName("clo2");
+        res.cloList.add(c);
+        c.setName("clo3");
+        res.cloList.add(c);
     }
 
   
@@ -511,7 +518,7 @@ public class Admin extends javax.swing.JFrame {
      * 
      * @param list 
      */
-   public void addRows1(clo []cloArr)
+   public void addRows1(List<clo> list)
 {
     model1=(DefaultTableModel) cloTable.getModel();
     for(int i=0;i<model1.getRowCount();i++)
@@ -519,12 +526,11 @@ public class Admin extends javax.swing.JFrame {
         model1.removeRow(i);
     }
     Object rowData[]=new Object[3];
-   for(int j=0;j<3;j++){
-    for(int i=0;i<cloArr[j].rubricList.size();i++)
+   for(int j=0;j<list.size();j++){
+    for(int i=0;i<list.get(j).getRubricList().size();i++)
     {
         rowData[0]="CLO "+(j+1);
-        rowData[1]= cloArr[j].rubricList.get(i).getRubricName();
-        rowData[2]= cloArr[j].rubricList.get(i).getRubricLevel();
+        rowData[1]= list.get(j).getRubricList().get(i).getRubricName();
         model1.addRow(rowData);
     }
    }
@@ -605,25 +611,29 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        boolean flag=true;
-        int cloIndex=Integer.parseInt(cloNumber.getSelectedItem().toString());
+        int cloIndex=Integer.parseInt(cloNumber.getSelectedItem().toString().substring(3));
        String rName=rubric.getText();
        double rubricLevel=Double.parseDouble(rLevel.getSelectedItem().toString());
        Rubric r=new Rubric();
        r.setRubricLevel(rubricLevel);
        if(r.setRubricName(rName)){
-       for(int i=0;i<res.arr[cloIndex-1].rubricList.size();i++){
-       if(res.arr[cloIndex-1].rubricList.get(i).getRubricName().equals(rName)){
-       flag=false;
-       break;
-       }
-       }
-       }
-       if(flag==true){
-       res.arr[cloIndex-1].rubricList.add(r);
-       addRows1(res.arr);
-       }
-       else{
-       JOptionPane.showMessageDialog(null,"Rubric Already Exist in this CLO......");
+//       for(int i=0;i<res.arr[cloIndex-1].rubricList.size();i++){
+//       if(res.arr[(cloIndex-1)].rubricList.size()>0)
+//       {
+//        if(res.arr[(cloIndex-1)].rubricList.get(i).getRubricName().equals(rName)){
+//       flag=false;
+//       break;
+//       }
+//       }
+//       }
+//       }
+//       if(flag==true){
+        
+       Result.cloList.get(cloIndex-1).addRubric(r);
+       addRows1(res.cloList);
+//       }
+//       else{
+//       JOptionPane.showMessageDialog(null,"Rubric Already Exist in this CLO......");
        }
     }//GEN-LAST:event_jButton5ActionPerformed
 

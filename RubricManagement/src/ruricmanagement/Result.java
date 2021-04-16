@@ -15,7 +15,7 @@ import javax.swing.*;
 public class Result {
 
     public static List<Student> studentList = new ArrayList<>();
-    public static clo []arr=new clo[3];
+    public static List<clo> cloList=new ArrayList<>();
 
     /**
      * 
@@ -52,5 +52,6 @@ public class Result {
      }
      return list;
      }
+   
     
 }

@@ -10,6 +10,26 @@ import java.util.*;
  * @author VENOM
  */
 public class clo {
-    public static List<Rubric>rubricList=new ArrayList<>();
+    private List<Rubric>rubricList=new ArrayList<>();
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Rubric> getRubricList() {
+        return rubricList;
+    }
+
+    public void setRubricList(Rubric r) {
+        this.rubricList.add(r);
+    }
+      public void addRubric(Rubric r){
+     this.rubricList.add(r);
+     }
+    
 }
