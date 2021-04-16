@@ -531,6 +531,7 @@ public class Admin extends javax.swing.JFrame {
     {
         rowData[0]="CLO "+(j+1);
         rowData[1]= list.get(j).getRubricList().get(i).getRubricName();
+        rowData[2]= list.get(j).getRubricList().get(i).getRubricLevel();
         model1.addRow(rowData);
     }
    }
