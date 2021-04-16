@@ -6,11 +6,18 @@
 package ruricmanagement;
 import javax.swing.*;
 import java.awt.Toolkit;
+import java.util.List;
+import javax.swing.table.*;
 /**
  *
  * @author VENOM
  */
 public class Admin extends javax.swing.JFrame {
+    private Result res=new Result();
+    DefaultTableModel model=new DefaultTableModel();
+    DefaultTableModel model1=new DefaultTableModel();
+    
+    
 
     /**
      * Creates new form Admin
@@ -19,8 +26,17 @@ public class Admin extends javax.swing.JFrame {
     public Admin() {
         initComponents();
         setIconImage();
+        model.addColumn("Reg No.");
+        model.addColumn("Name");
+       
+        stdTable.setModel(model);
+        model1.addColumn("CLO");
+        model1.addColumn("Rubric");
+        model1.addColumn("Rubric Level");
+        cloTable.setModel(model1);
     }
 
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,31 +56,32 @@ public class Admin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         sName = new javax.swing.JTextField();
         search = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         regNo = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         stdPanelT = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        stdTable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         cloPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        rubric = new javax.swing.JTextField();
+        cloNumber = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        cloTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
+        rLevel = new javax.swing.JComboBox<>();
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("RubricManagement");
         setBackground(new java.awt.Color(0, 153, 153));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -124,11 +141,6 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setBackground(new java.awt.Color(0, 153, 153));
-        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel3.setText("Search");
-        jLabel3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(240, 240, 240)));
-
         regNo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         regNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +173,7 @@ public class Admin extends javax.swing.JFrame {
         stdPanelT.setBackground(new java.awt.Color(0, 153, 153));
         stdPanelT.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        stdTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -169,7 +181,7 @@ public class Admin extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(stdTable);
 
         javax.swing.GroupLayout stdPanelTLayout = new javax.swing.GroupLayout(stdPanelT);
         stdPanelT.setLayout(stdPanelTLayout);
@@ -192,14 +204,25 @@ public class Admin extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(240, 240, 240));
         jLabel5.setText("CopyRight@2020-CS-57");
 
+        jButton8.setBackground(new java.awt.Color(0, 153, 153));
+        jButton8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(240, 240, 240));
+        jButton8.setText("Search");
+        jButton8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout stdPanelLayout = new javax.swing.GroupLayout(stdPanel);
         stdPanel.setLayout(stdPanelLayout);
         stdPanelLayout.setHorizontalGroup(
             stdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stdPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(jButton8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(135, 135, 135))
             .addGroup(stdPanelLayout.createSequentialGroup()
@@ -249,7 +272,7 @@ public class Admin extends javax.swing.JFrame {
                     .addGroup(stdPanelLayout.createSequentialGroup()
                         .addGroup(stdPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(jButton8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(stdPanelT, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -270,27 +293,20 @@ public class Admin extends javax.swing.JFrame {
         jLabel7.setText("Rubric");
         jLabel7.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(240, 240, 240)));
 
-        jTextField2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        rubric.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        rubric.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                rubricActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CLO1", "CLO2", "CLO3" }));
-        jComboBox1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        cloNumber.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CLO1", "CLO2", "CLO3" }));
+        cloNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel8.setBackground(new java.awt.Color(0, 153, 153));
         jLabel8.setForeground(new java.awt.Color(240, 240, 240));
         jLabel8.setText("Rubric level");
         jLabel8.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(240, 240, 240)));
-
-        jTextField3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
 
         jButton6.setBackground(new java.awt.Color(0, 153, 153));
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -310,11 +326,16 @@ public class Admin extends javax.swing.JFrame {
         jButton5.setForeground(new java.awt.Color(240, 240, 240));
         jButton5.setText("Add Rubric");
         jButton5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        cloTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -322,7 +343,7 @@ public class Admin extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(cloTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -344,6 +365,10 @@ public class Admin extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(240, 240, 240));
         jLabel9.setText("CopyRight@2020-CS-57");
 
+        rLevel.setBackground(new java.awt.Color(240, 240, 240));
+        rLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        rLevel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
         javax.swing.GroupLayout cloPanelLayout = new javax.swing.GroupLayout(cloPanel);
         cloPanel.setLayout(cloPanelLayout);
         cloPanelLayout.setHorizontalGroup(
@@ -359,10 +384,10 @@ public class Admin extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel8))
                                 .addGap(35, 35, 35)
-                                .addGroup(cloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(cloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(rubric, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(cloNumber, javax.swing.GroupLayout.Alignment.LEADING, 0, 176, Short.MAX_VALUE)
+                                    .addComponent(rLevel, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jButton5)))
                     .addGroup(cloPanelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -382,22 +407,22 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(168, 168, 168)
                 .addGroup(cloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cloNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(cloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rubric, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(38, 38, 38)
                 .addGroup(cloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(rLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cloPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 34, Short.MAX_VALUE)
                 .addGroup(cloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -463,7 +488,48 @@ public class Admin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  /**
+   * 
+   * @param list 
+   */
+    public void addRows(List<Student> list)
+{
+    model=(DefaultTableModel) stdTable.getModel();
+    for(int i=0;i<model.getRowCount();i++)
+    {
+        model.removeRow(i);
+    }
+    Object rowData[]=new Object[2];
+    for(int i=0;i<list.size();i++)
+    {
+        rowData[0]=list.get(i).getRegNo();
+        rowData[1]=list.get(i).getName(); 
+        model.addRow(rowData);
+    }
+}
+    /**
+     * 
+     * @param list 
+     */
+   public void addRows1(clo []cloArr)
+{
+    model1=(DefaultTableModel) cloTable.getModel();
+    for(int i=0;i<model1.getRowCount();i++)
+    {
+        model1.removeRow(i);
+    }
+    Object rowData[]=new Object[3];
+   for(int j=0;j<3;j++){
+    for(int i=0;i<cloArr[j].rubricList.size();i++)
+    {
+        rowData[0]="CLO "+(j+1);
+        rowData[1]= cloArr[j].rubricList.get(i).getRubricName();
+        rowData[2]= cloArr[j].rubricList.get(i).getRubricLevel();
+        model1.addRow(rowData);
+    }
+   }
+}
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         changePanel(cloPanel);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -481,11 +547,36 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_searchActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        Student std=new Student();
+        boolean flag=true;
+        if(std.setName(sName.getText())&&std.setRegNo(regNo.getText())){
+            for(int i=0;i<res.studentList.size();i++)
+            {
+            if(res.studentList.get(i).getRegNo().equals(regNo.getText())){
+                flag=false;
+            break;
+            }
+            
+            }
+            if(flag==false){
+            JOptionPane.showMessageDialog(null,"Registration Number Already Exist...");
+            } 
+            else{
+            res.addStudent(std);
+            addRows(res.studentList);
+            }
+        }
+        
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        int getRow=stdTable.getSelectedRow();
+        String regNo=stdTable.getModel().getValueAt(getRow, 0).toString();
+        res.delStudent(regNo);
+        model.removeRow(getRow);
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void regNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regNoActionPerformed
@@ -504,13 +595,37 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void rubricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rubricActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_rubricActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       addRows(res.searchStd(search.getText()));
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       boolean flag=true;
+        int cloIndex=Integer.parseInt(cloNumber.getSelectedItem().toString());
+       String rName=rubric.getText();
+       double rubricLevel=Double.parseDouble(rLevel.getSelectedItem().toString());
+       Rubric r=new Rubric();
+       r.setRubricLevel(rubricLevel);
+       if(r.setRubricName(rName)){
+       for(int i=0;i<res.arr[cloIndex-1].rubricList.size();i++){
+       if(res.arr[cloIndex-1].rubricList.get(i).getRubricName().equals(rName)){
+       flag=false;
+       break;
+       }
+       }
+       }
+       if(flag==true){
+       res.arr[cloIndex-1].rubricList.add(r);
+       addRows1(res.arr);
+       }
+       else{
+       JOptionPane.showMessageDialog(null,"Rubric Already Exist in this CLO......");
+       }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -558,7 +673,9 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cloNumber;
     private javax.swing.JPanel cloPanel;
+    private javax.swing.JTable cloTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -566,10 +683,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -581,15 +697,14 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JComboBox<String> rLevel;
     private javax.swing.JTextField regNo;
+    private javax.swing.JTextField rubric;
     private javax.swing.JTextField sName;
     private javax.swing.JTextField search;
     private javax.swing.JPanel stdPanel;
     private javax.swing.JPanel stdPanelT;
+    private javax.swing.JTable stdTable;
     // End of variables declaration//GEN-END:variables
 }
